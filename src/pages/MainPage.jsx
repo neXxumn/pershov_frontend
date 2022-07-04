@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, memo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import Card from '../components/Card/Card';
@@ -36,4 +36,4 @@ function MainPage() {
     </div>
   );
 }
-export default MainPage;
+export default memo(MainPage);

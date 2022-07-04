@@ -1,12 +1,12 @@
 import React from 'react';
-import preloader from '../../assets/images/spinner-solid-svgrepo-com.svg'
+import preloader from '../../assets/images/spinner-solid-svgrepo-com.svg';
 
-const Preloader = (props) => {
+function Preloader() {
   return (
     <div>
-      <img src={preloader} />
+      <img src={preloader} alt="preloader" />
     </div>
-  )
+  );
 }
 
 export default Preloader;

@@ -1,4 +1,5 @@
-import * as React from 'react';
+import React, { memo, useState } from 'react';
+
 import { styled } from '@mui/material/styles';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
@@ -11,6 +12,8 @@ import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import { red } from '@mui/material/colors';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+
+import { string } from 'prop-types';
 
 import './Card.css';
 
@@ -25,9 +28,9 @@ const ExpandMore = styled((props) => {
   }),
 }));
 
-export default function RecipeReviewCard(props) {
+function RecipeReviewCard(props) {
   const { title, content, image } = props;
-  const [expanded, setExpanded] = React.useState(false);
+  const [expanded, setExpanded] = useState(false);
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
@@ -36,12 +39,14 @@ export default function RecipeReviewCard(props) {
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardHeader
-        avatar={
-          <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
+        avatar={(
+          <Avatar
+            sx={{ bgcolor: red[500] }}
+            aria-label="recipe"
+          >
             R
           </Avatar>
-        }
-        
+        )}
         title="Shrimp and Chorizo Paella"
         subheader="September 14, 2016"
       />
@@ -77,8 +82,10 @@ export default function RecipeReviewCard(props) {
   );
 }
 
-// RecipeReviewCard.propTypes = {
-//   title: string.isRequired,
-//   content: string.isRequired,
-//   image: string.isRequired
-// };
+RecipeReviewCard.propTypes = {
+  title: string.isRequired,
+  content: string.isRequired,
+  image: string.isRequired,
+};
+
+export default memo(RecipeReviewCard);
