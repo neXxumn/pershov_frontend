@@ -1,6 +1,6 @@
 import { takeEvery, put, call } from 'redux-saga/effects';
 
-import * as ActionTypes from '../constants';
+import * as actionTypes from '../constants';
 import api from '../../api/api';
 import { getPostsReceived, getPostsFailed } from '../actions';
 
@@ -14,5 +14,5 @@ function* getPostSaga() {
 }
 
 export default function* watcherSaga() {
-  yield takeEvery(ActionTypes.POSTS_REQUESTED, getPostSaga);
+  yield takeEvery(actionTypes.POSTS_REQUESTED, getPostSaga);
 }
