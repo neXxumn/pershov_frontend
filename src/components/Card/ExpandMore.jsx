@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 
 import { styled } from '@mui/material/styles';
 import IconButton from '@mui/material/IconButton';
@@ -14,4 +14,4 @@ const ExpandMore = styled((props) => {
   }),
 }));
 
-export default ExpandMore;
+export default memo(ExpandMore);
