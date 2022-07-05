@@ -9,7 +9,7 @@ export const getPostsReceived = (payload) => ({
   payload,
 });
 
-export const getPostsFailed = (errorMessage) => ({
+export const getPostsFailed = (error) => ({
   type: actionTypes.POSTS_FAILED,
-  errorMessage,
+  error,
 });

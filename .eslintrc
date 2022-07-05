@@ -16,6 +16,6 @@
       }
     ],
     "no-param-reassign": 0,
-    "extends": "eslint:recommended"
+    "extends": 0
   }
 }

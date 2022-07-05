@@ -11,7 +11,7 @@ import './Header.css';
 function Header() {
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar>
+      <AppBar className="mui-relative">
         <Toolbar>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Mars News

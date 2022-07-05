@@ -11,9 +11,8 @@ import Typography from '@mui/material/Typography';
 import { red } from '@mui/material/colors';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
-import ExpandMore from './ExpandMore';
-
 import { string } from 'prop-types';
+import ExpandMore from './ExpandMore';
 
 import './Card.css';
 
@@ -36,14 +35,14 @@ function RecipeReviewCard(props) {
             R
           </Avatar>
         )}
-        title="Shrimp and Chorizo Paella"
+        title="Card"
         subheader="September 14, 2016"
       />
       <CardMedia
         component="img"
         height="194"
         image={image}
-        alt="Paella dish"
+        alt="image"
       />
       <CardContent>
         <Typography className="title" variant="body2" color="text.secondary">

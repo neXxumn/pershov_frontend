@@ -1,5 +1,5 @@
-import api from './api'
+import api from './api';
 
-const getPostRequest = () => api.get('/posts')
+const getPostRequest = () => api.get('/posts');
 
 export default getPostRequest;

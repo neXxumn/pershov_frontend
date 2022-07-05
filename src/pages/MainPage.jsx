@@ -15,7 +15,7 @@ function MainPage() {
   }, [dispatch]);
 
   const posts = useSelector((state) => state.posts.posts);
-  const error = useSelector((state) => state.posts.errorMessage);
+  const error = useSelector((state) => state.posts.error);
   const isFetching = useSelector((state) => state.posts.isFetching);
 
   if (error) return <p className="error">{error}</p>;
@@ -24,14 +24,16 @@ function MainPage() {
   return (
     <div className="mainPageContainer">
       {
-        posts.map((item) => (
-          <Card
-            title={item.title}
-            content={item.content}
-            image={item.image}
-            key={item.id}
-          />
-        ))
+        (posts.length === 0)
+          ? <p className="error">No news</p>
+          : posts.map((item) => (
+            <Card
+              title={item.title}
+              content={item.content}
+              image={item.image}
+              key={item.id}
+            />
+          ))
       }
     </div>
   );
