@@ -1,14 +1,11 @@
 import React, { memo, useState } from 'react';
 
 import Card from '@mui/material/Card';
-import CardHeader from '@mui/material/CardHeader';
 import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
 import Collapse from '@mui/material/Collapse';
-import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
-import { red } from '@mui/material/colors';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 import { string } from 'prop-types';
@@ -26,18 +23,6 @@ function RecipeReviewCard(props) {
 
   return (
     <Card sx={{ maxWidth: 345 }}>
-      <CardHeader
-        avatar={(
-          <Avatar
-            sx={{ bgcolor: red[500] }}
-            aria-label="recipe"
-          >
-            R
-          </Avatar>
-        )}
-        title="Card"
-        subheader="September 14, 2016"
-      />
       <CardMedia
         component="img"
         height="194"
