@@ -1,0 +1,11 @@
+.mainPageContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  height: 100vh;
+}
+
+.error {
+  color: rgb(255, 145, 0);
+  font-size: 50px;
+}

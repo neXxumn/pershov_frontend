@@ -1,0 +1,21 @@
+{
+  "extends": "airbnb",
+  "plugins": [
+    "react"
+  ],
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "rules": {
+    "react/jsx-props-no-spreading": [
+      1,
+      {
+        "html": "ignore"
+      }
+    ],
+    "no-param-reassign": 0,
+    "extends": 0
+  }
+}
