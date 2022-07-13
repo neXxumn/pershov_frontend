@@ -4,7 +4,10 @@ import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
+
+import { REGISTRATION, AUTHORIZATION } from '../../redux/constants';
+
+import AuthModal from '../AuthModal/AuthModal';
 
 import './Header.css';
 
@@ -16,8 +19,8 @@ function Header() {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Mars News
           </Typography>
-          <Button color="inherit">Sign In</Button>
-          <Button color="inherit">Sign Up</Button>
+          <AuthModal modalType={REGISTRATION} name="Sign In" />
+          <AuthModal modalType={AUTHORIZATION} name="Sign Up" />
         </Toolbar>
       </AppBar>
     </Box>
