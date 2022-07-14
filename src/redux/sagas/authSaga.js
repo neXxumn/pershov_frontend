@@ -6,6 +6,8 @@ import api from '../../api/api';
 
 export function* authUser({ payload }) {
   try {
+    // eslint-disable-next-line no-debugger
+    debugger;
     const endpoint = payload.modalType === 'login' ? 'login' : 'registration';
     const { data } = yield call(api.post, endpoint, payload);
     const { token } = data;

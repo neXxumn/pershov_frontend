@@ -1,18 +1,31 @@
 import { React, memo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Formik, Field, Form } from 'formik';
+import { Formik, Form, useField } from 'formik';
+import { string } from 'prop-types';
 
 import Backdrop from '@mui/material/Backdrop';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
-import Button from '@mui/material/Button';
-
-import PropTypes from 'prop-types';
 
 import { REGISTRATION } from '../../redux/constants';
+import { userAuthValidate, userRegistrationValidate } from '../../helpers/validate';
+import { toggleModal, authRequest } from '../../redux/actions';
 
-import { toggleModal } from '../../redux/actions';
+function Input({ label, ...props }) {
+  const [field, meta] = useField(props);
+  return (
+    <>
+      <div>
+        <label htmlFor={field.name}>{`Enter ${label}: `}</label>
+        <input className="text-input" {...field} {...props} />
+      </div>
+      {meta.touched && meta.error ? (
+        <div className="error">{meta.error}</div>
+      ) : null}
+    </>
+  );
+}
 
 const style = {
   position: 'absolute',
@@ -26,37 +39,35 @@ const style = {
   p: 4,
 };
 
+const RegistrationInitialValue = {
+  email: '',
+  password: '',
+};
+
 const AuthorizationInitialValue = {
   email: '',
   name: '',
   password: '',
 };
 
-const RegistrationInitialValue = {
-  email: '',
-  password: '',
-};
-
-function TransitionsModal(props) {
-  const { name, modalType } = props;
-
+function AuthModal() {
   const dispatch = useDispatch();
 
   const isModalOpen = useSelector((state) => state.auth.isModalOpen);
+  const modalType = useSelector((state) => state.auth.modalType);
 
   const isAuth = modalType === REGISTRATION;
 
-  const handleOpen = () => {
-    dispatch(toggleModal({ isModalOpen: true, modalType: '' }));
+  const handleClose = () => {
+    dispatch(toggleModal({ isModalOpen: false, modalType: isAuth }));
   };
 
-  const handleClose = () => {
-    dispatch(toggleModal({ isModalOpen: false, modalType: '' }));
+  const userInitialization = (data) => {
+    dispatch(authRequest(data));
   };
 
   return (
     <div>
-      <Button onClick={handleOpen}>{name}</Button>
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
@@ -72,32 +83,33 @@ function TransitionsModal(props) {
           <Box sx={style}>
             <h1>{isAuth ? 'Sign Up' : 'Sign In'}</h1>
             <Formik
-              initialValue={isAuth ? AuthorizationInitialValue : RegistrationInitialValue}
+              initialValues={isAuth ? AuthorizationInitialValue : RegistrationInitialValue}
+              validationSchema={isAuth ? userAuthValidate : userRegistrationValidate}
+              onSubmit={userInitialization}
             >
               <Form>
-                <label htmlFor="email">Email</label>
-                <Field
-                  id="email"
+                <Input
+                  label="Email"
                   name="email"
-                  placeholder="email"
+                  type="email"
+                  placeholder="enter@your.email"
                 />
 
-                <label htmlFor="name">Name</label>
                 {
-                  !isAuth && (
-                    <Field
-                      id="name"
+                  isAuth && (
+                    <Input
+                      label="Name"
                       name="name"
-                      placeholder="email"
+                      type="text"
+                      placeholder="Your name..."
                     />
                   )
                 }
-                <label htmlFor="password">Password</label>
-                <Field
-                  id="password"
+                <Input
+                  label="Password"
                   name="password"
-                  placeholder="password"
                   type="password"
+                  placeholder="Your password..."
                 />
                 <button type="submit">Submit</button>
               </Form>
@@ -109,9 +121,8 @@ function TransitionsModal(props) {
   );
 }
 
-TransitionsModal.propTypes = {
-  name: PropTypes.string.isRequired,
-  modalType: PropTypes.string.isRequired,
+Input.propTypes = {
+  label: string.isRequired,
 };
 
-export default memo(TransitionsModal);
+export default memo(AuthModal);

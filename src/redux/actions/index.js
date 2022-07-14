@@ -14,8 +14,9 @@ export const getPostsFailed = (error) => ({
   error,
 });
 
-export const authRequest = () => ({
+export const authRequest = (payload) => ({
   type: actionTypes.AUTH_REQUESTED,
+  payload,
 });
 
 export const authReceived = (payload) => ({
