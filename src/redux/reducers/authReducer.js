@@ -8,6 +8,7 @@ import {
 
 const initialState = {
   isAccess: Boolean(localStorage.getItem('token')),
+  authUserData: null,
   isLoading: false,
   modalType: '',
   isModalOpen: false,
@@ -20,12 +21,15 @@ const authReducer = (state = initialState, action = {}) => {
       return {
         ...state,
         isLoading: true,
+        isAccess: false,
         error: null,
       };
     case AUTH_RECEIVED:
       return {
         ...state,
         isLoading: false,
+        isAccess: true,
+        authUserData: action.payload,
         error: null,
       };
     case AUTH_FAILED:
@@ -38,6 +42,8 @@ const authReducer = (state = initialState, action = {}) => {
       return {
         ...state,
         isAuth: false,
+        isAccess: false,
+        authUserData: null,
         error: null,
       };
     case TOGGLE_MODAL:

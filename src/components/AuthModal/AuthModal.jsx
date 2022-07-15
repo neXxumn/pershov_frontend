@@ -1,16 +1,15 @@
 import { React, memo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Formik, Form, useField } from 'formik';
-import { string } from 'prop-types';
+import { string, func, bool } from 'prop-types';
 
 import Backdrop from '@mui/material/Backdrop';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
 
-import { REGISTRATION } from '../../redux/constants';
 import { userAuthValidate, userRegistrationValidate } from '../../helpers/validate';
-import { toggleModal, authRequest } from '../../redux/actions';
+import { authRequest } from '../../redux/actions';
 
 function Input({ label, ...props }) {
   const [field, meta] = useField(props);
@@ -50,20 +49,16 @@ const AuthorizationInitialValue = {
   password: '',
 };
 
-function AuthModal() {
+function AuthModal({ handleClose, isAccess, isAuth }) {
   const dispatch = useDispatch();
 
   const isModalOpen = useSelector((state) => state.auth.isModalOpen);
-  const modalType = useSelector((state) => state.auth.modalType);
-
-  const isAuth = modalType === REGISTRATION;
-
-  const handleClose = () => {
-    dispatch(toggleModal({ isModalOpen: false, modalType: isAuth }));
-  };
 
   const userInitialization = (data) => {
     dispatch(authRequest(data));
+    console.log(isAccess);
+    // eslint-disable-next-line no-debugger
+    // debugger;
   };
 
   return (
@@ -111,7 +106,7 @@ function AuthModal() {
                   type="password"
                   placeholder="Your password..."
                 />
-                <button type="submit">Submit</button>
+                <button onClick={handleClose} type="submit">Submit</button>
               </Form>
             </Formik>
           </Box>
@@ -123,6 +118,12 @@ function AuthModal() {
 
 Input.propTypes = {
   label: string.isRequired,
+};
+
+AuthModal.propTypes = {
+  handleClose: func.isRequired,
+  isAccess: bool.isRequired,
+  isAuth: bool.isRequired,
 };
 
 export default memo(AuthModal);
