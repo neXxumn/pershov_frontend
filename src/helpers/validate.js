@@ -8,10 +8,10 @@ const MESSAGE_EMAIL_REQUIRED = 'Email is required';
 const MESSAGE_PASSWORD_ERROR = 'Password must be at least 6 characters';
 const MESSAGE_PASSWORD_REQUIRE = 'Password is required';
 const MESSAGE_MAX_CHARACTERS = 'Must be 15 characters or less';
-const MESSAGE_REQUIRED = 'Required';
+// const MESSAGE_REQUIRED = 'Required';
 const YUP_REFERENCE = 'password';
 const MESSAGE_CONFIRM_PASSWORD_ERROR = 'Password must match';
-const MESSAGE_CONFIRM_PASSWORD_REQUIRE = 'Confirm password is require';
+// const MESSAGE_CONFIRM_PASSWORD_REQUIRE = 'Confirm password is require';
 
 const authorizationFormValidate = {
   email: Yup
@@ -27,8 +27,7 @@ const authorizationFormValidate = {
 const registrationFormValidate = {
   name: Yup
     .string()
-    .max(MAXIMUM_LENGTH, MESSAGE_MAX_CHARACTERS)
-    .required(MESSAGE_REQUIRED),
+    .max(MAXIMUM_LENGTH, MESSAGE_MAX_CHARACTERS), // .required(MESSAGE_REQUIRED),
   email: Yup
     .string()
     .email(MESSAGE_EMAIL_IS_INVALID)
@@ -39,8 +38,8 @@ const registrationFormValidate = {
     .required(MESSAGE_PASSWORD_REQUIRE),
   confirmPassword: Yup
     .string()
-    .oneOf([Yup.ref(YUP_REFERENCE), null], MESSAGE_CONFIRM_PASSWORD_ERROR)
-    .required(MESSAGE_CONFIRM_PASSWORD_REQUIRE),
+    .oneOf([Yup.ref(YUP_REFERENCE), null], MESSAGE_CONFIRM_PASSWORD_ERROR),
+// .required(MESSAGE_CONFIRM_PASSWORD_REQUIRE),
 };
 
 export const userAuthValidate = () => Yup.object(authorizationFormValidate);

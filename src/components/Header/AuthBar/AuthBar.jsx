@@ -18,7 +18,7 @@ function AuthBar() {
   const isAccess = useSelector((state) => state.auth.isAccess);
   const modalType = useSelector((state) => state.auth.modalType);
 
-  const isAuth = modalType === REGISTRATION;
+  const isAuthorization = modalType === AUTHORIZATION;
 
   const handleOpen = (typeOfModal) => {
     dispatch(toggleModal({ isModalOpen: true, modalType: typeOfModal }));
@@ -30,7 +30,6 @@ function AuthBar() {
 
   const logout = async () => {
     await dispatch(authLogout());
-    localStorage.removeItem('token');
   };
 
   return (
@@ -44,7 +43,7 @@ function AuthBar() {
             </>
           )
           : (
-            <div>
+            <div className="logout">
               <div>
                 <img src={defaultUserAvatar} className="avatar" alt="user avatar" />
               </div>
@@ -55,7 +54,7 @@ function AuthBar() {
       <AuthModal
         handleClose={handleClose}
         isAccess={isAccess}
-        isAuth={isAuth}
+        isAuthorization={isAuthorization}
       />
     </div>
   );

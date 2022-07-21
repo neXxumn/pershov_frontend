@@ -11,13 +11,15 @@ import Fade from '@mui/material/Fade';
 import { userAuthValidate, userRegistrationValidate } from '../../helpers/validate';
 import { authRequest } from '../../redux/actions';
 
+import './AuthModal.css';
+
 function Input({ label, ...props }) {
   const [field, meta] = useField(props);
   return (
     <>
-      <div>
+      <div className="field">
         <label htmlFor={field.name}>{`Enter ${label}: `}</label>
-        <input className="text-input" {...field} {...props} />
+        <input className="text-input input" {...field} {...props} />
       </div>
       {meta.touched && meta.error ? (
         <div className="error">{meta.error}</div>
@@ -32,33 +34,37 @@ const style = {
   left: '50%',
   transform: 'translate(-50%, -50%)',
   width: 400,
-  bgcolor: 'background.paper',
-  border: '2px solid #000',
+  bgcolor: '#1565C0',
+  color: '#BBDEFB',
+  border: '2px solid #BBDEFB',
   boxShadow: 24,
   p: 4,
 };
 
-const RegistrationInitialValue = {
+const AuthorizationInitialValue = {
   email: '',
   password: '',
 };
 
-const AuthorizationInitialValue = {
+const RegistrationInitialValue = {
   email: '',
   name: '',
   password: '',
 };
 
-function AuthModal({ handleClose, isAccess, isAuth }) {
+function AuthModal({
+  handleClose,
+  isAccess,
+  isAuthorization,
+}) {
   const dispatch = useDispatch();
 
   const isModalOpen = useSelector((state) => state.auth.isModalOpen);
+  const modalName = isAuthorization ? 'Sign In' : 'Sign Up';
+  const error = useSelector((state) => state.auth.error);
 
   const userInitialization = (data) => {
-    dispatch(authRequest(data));
-    console.log(isAccess);
-    // eslint-disable-next-line no-debugger
-    // debugger;
+    dispatch(authRequest({ ...data, authorization: isAuthorization }));
   };
 
   return (
@@ -73,13 +79,16 @@ function AuthModal({ handleClose, isAccess, isAuth }) {
         BackdropProps={{
           timeout: 500,
         }}
+        className="modal"
       >
         <Fade in={isModalOpen}>
           <Box sx={style}>
-            <h1>{isAuth ? 'Sign Up' : 'Sign In'}</h1>
+            <h1>{modalName}</h1>
             <Formik
-              initialValues={isAuth ? AuthorizationInitialValue : RegistrationInitialValue}
-              validationSchema={isAuth ? userAuthValidate : userRegistrationValidate}
+              initialValues={isAuthorization ? AuthorizationInitialValue : RegistrationInitialValue}
+              validationSchema={isAuthorization
+                ? userAuthValidate
+                : userRegistrationValidate}
               onSubmit={userInitialization}
             >
               <Form>
@@ -91,7 +100,7 @@ function AuthModal({ handleClose, isAccess, isAuth }) {
                 />
 
                 {
-                  isAuth && (
+                  !isAuthorization && (
                     <Input
                       label="Name"
                       name="name"
@@ -106,7 +115,23 @@ function AuthModal({ handleClose, isAccess, isAuth }) {
                   type="password"
                   placeholder="Your password..."
                 />
-                <button onClick={handleClose} type="submit">Submit</button>
+                <p className="form-error">
+                  { !error ? '' : error }
+                  { isAccess ? `${modalName} successfull` : '' }
+                </p>
+                <div className="form-buttons-container">
+                  <button
+                    className="form-button"
+                    type="submit"
+                  >
+                    {
+                        modalName
+                    }
+                  </button>
+                  <button className="form-button" type="button" onClick={handleClose}>
+                    Close
+                  </button>
+                </div>
               </Form>
             </Formik>
           </Box>
@@ -123,7 +148,7 @@ Input.propTypes = {
 AuthModal.propTypes = {
   handleClose: func.isRequired,
   isAccess: bool.isRequired,
-  isAuth: bool.isRequired,
+  isAuthorization: bool.isRequired,
 };
 
 export default memo(AuthModal);

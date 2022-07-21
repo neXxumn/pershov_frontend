@@ -6,8 +6,10 @@ import {
   TOGGLE_MODAL,
 } from '../constants';
 
+import { getToken } from '../helpers/index';
+
 const initialState = {
-  isAccess: Boolean(localStorage.getItem('token')),
+  isAccess: Boolean(getToken()),
   authUserData: null,
   isLoading: false,
   modalType: '',
@@ -36,12 +38,12 @@ const authReducer = (state = initialState, action = {}) => {
       return {
         ...state,
         isLoading: false,
+        isAccess: false,
         error: action.error,
       };
     case AUTH_LOGOUT:
       return {
         ...state,
-        isAuth: false,
         isAccess: false,
         authUserData: null,
         error: null,

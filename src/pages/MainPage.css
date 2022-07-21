@@ -6,6 +6,8 @@
 }
 
 .error {
-  color: rgb(255, 145, 0);
+  color: rgb(241, 242, 247);
+  text-shadow: 1px 1px 25px rgb(189, 203, 243);
+
   font-size: 50px;
 }
