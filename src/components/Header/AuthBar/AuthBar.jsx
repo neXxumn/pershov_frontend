@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React, { memo, useState } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -8,7 +8,7 @@ import { REGISTRATION, AUTHORIZATION } from '../../../redux/constants';
 
 import AuthModal from '../../AuthModal/AuthModal';
 
-import { toggleModal, authLogout } from '../../../redux/actions';
+import { authLogout } from '../../../redux/actions';
 
 import defaultUserAvatar from '../../../assets/images/default-user-avatar.svg';
 import './AuthBar.css';
@@ -16,16 +16,20 @@ import './AuthBar.css';
 function AuthBar() {
   const dispatch = useDispatch();
   const isAccess = useSelector((state) => state.auth.isAccess);
-  const modalType = useSelector((state) => state.auth.modalType);
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalType, setModalType] = useState('');
 
   const isAuthorization = modalType === AUTHORIZATION;
 
   const handleOpen = (typeOfModal) => {
-    dispatch(toggleModal({ isModalOpen: true, modalType: typeOfModal }));
+    setIsModalOpen(true);
+    setModalType(typeOfModal);
   };
 
   const handleClose = () => {
-    dispatch(toggleModal({ isModalOpen: false, modalType }));
+    setIsModalOpen(false);
+    setModalType(modalType);
   };
 
   const logout = async () => {
@@ -54,6 +58,7 @@ function AuthBar() {
       <AuthModal
         handleClose={handleClose}
         isAccess={isAccess}
+        isModalOpen={isModalOpen}
         isAuthorization={isAuthorization}
       />
     </div>

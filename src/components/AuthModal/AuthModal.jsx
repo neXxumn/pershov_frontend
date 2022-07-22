@@ -55,11 +55,11 @@ const RegistrationInitialValue = {
 function AuthModal({
   handleClose,
   isAccess,
+  isModalOpen,
   isAuthorization,
 }) {
   const dispatch = useDispatch();
 
-  const isModalOpen = useSelector((state) => state.auth.isModalOpen);
   const modalName = isAuthorization ? 'Sign In' : 'Sign Up';
   const error = useSelector((state) => state.auth.error);
 
@@ -148,6 +148,7 @@ Input.propTypes = {
 AuthModal.propTypes = {
   handleClose: func.isRequired,
   isAccess: bool.isRequired,
+  isModalOpen: bool.isRequired,
   isAuthorization: bool.isRequired,
 };
 

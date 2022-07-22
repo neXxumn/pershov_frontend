@@ -3,7 +3,6 @@ import {
   AUTH_RECEIVED,
   AUTH_FAILED,
   AUTH_LOGOUT,
-  TOGGLE_MODAL,
 } from '../constants';
 
 import { getToken } from '../helpers/index';
@@ -12,8 +11,6 @@ const initialState = {
   isAccess: Boolean(getToken()),
   authUserData: null,
   isLoading: false,
-  modalType: '',
-  isModalOpen: false,
   error: null,
 };
 
@@ -47,12 +44,6 @@ const authReducer = (state = initialState, action = {}) => {
         isAccess: false,
         authUserData: null,
         error: null,
-      };
-    case TOGGLE_MODAL:
-      return {
-        ...state,
-        isModalOpen: action.payload.isModalOpen,
-        modalType: action.payload.modalType,
       };
     default:
       return state;

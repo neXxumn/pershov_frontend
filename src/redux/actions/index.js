@@ -32,8 +32,3 @@ export const authFailed = (error) => ({
 export const authLogout = () => ({
   type: actionTypes.AUTH_LOGOUT,
 });
-
-export const toggleModal = (payload) => ({
-  type: actionTypes.TOGGLE_MODAL,
-  payload,
-});
