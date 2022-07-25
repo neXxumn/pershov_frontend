@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { getToken } from '../redux/helpers/index';
 
 const api = axios.create({
   baseURL: process.env.REACT_APP_API_URL,
@@ -7,7 +8,7 @@ const api = axios.create({
 api.interceptors.request.use(
   (config) => {
     const { headers } = config;
-    const token = localStorage.getItem('token');
+    const token = getToken();
     if (token) {
       headers.Authorization = token;
     }

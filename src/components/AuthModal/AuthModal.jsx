@@ -1,32 +1,18 @@
 import { React, memo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Formik, Form, useField } from 'formik';
-import { string, func, bool } from 'prop-types';
+import { Formik, Form } from 'formik';
+import { func, bool } from 'prop-types';
 
 import Backdrop from '@mui/material/Backdrop';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
 
+import Input from '../common/Input/Input';
 import { userAuthValidate, userRegistrationValidate } from '../../helpers/validate';
 import { authRequest } from '../../redux/actions';
 
 import './AuthModal.css';
-
-function Input({ label, ...props }) {
-  const [field, meta] = useField(props);
-  return (
-    <>
-      <div className="field">
-        <label htmlFor={field.name}>{`Enter ${label}: `}</label>
-        <input className="text-input input" {...field} {...props} />
-      </div>
-      {meta.touched && meta.error ? (
-        <div className="error">{meta.error}</div>
-      ) : null}
-    </>
-  );
-}
 
 const style = {
   position: 'absolute',
@@ -64,7 +50,7 @@ function AuthModal({
   const error = useSelector((state) => state.auth.error);
 
   const userInitialization = (data) => {
-    dispatch(authRequest({ ...data, authorization: isAuthorization }));
+    dispatch(authRequest({ authData: data, authorization: isAuthorization }));
   };
 
   return (
@@ -117,6 +103,7 @@ function AuthModal({
                 />
                 <p className="form-error">
                   { !error ? '' : error }
+                  <br />
                   { isAccess ? `${modalName} successfull` : '' }
                 </p>
                 <div className="form-buttons-container">
@@ -140,10 +127,6 @@ function AuthModal({
     </div>
   );
 }
-
-Input.propTypes = {
-  label: string.isRequired,
-};
 
 AuthModal.propTypes = {
   handleClose: func.isRequired,

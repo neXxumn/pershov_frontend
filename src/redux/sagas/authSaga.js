@@ -10,20 +10,18 @@ export function* authUser({ payload }) {
     const endpoint = payload.authorization
       ? 'authorization'
       : 'registration';
-    const { email, name, password } = payload;
-    const body = name
-      ? { email, name, password }
-      : { email, password };
+    const body = payload.authData;
     const { data } = yield call(api.post, endpoint, body);
     const { token } = data;
-
-    if (token) {
-      setToken(token);
-    }
-
+    setToken(token);
     yield put(authReceived(data));
   } catch (error) {
-    yield put(authFailed(error.message));
+    const registrationError = error.response.data.validation_errors;
+    if (registrationError) {
+      yield put(authFailed(registrationError.email));
+    } else {
+      yield put(authFailed(error.response.data.login));
+    }
   }
 }
 

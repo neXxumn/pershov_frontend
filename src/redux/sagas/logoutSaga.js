@@ -1,4 +1,4 @@
-import { takeEvery, put } from 'redux-saga/effects';
+import { takeLatest, put } from 'redux-saga/effects';
 
 import * as actionTypes from '../constants';
 import { authFailed } from '../actions';
@@ -7,11 +7,11 @@ import { removeToken } from '../helpers';
 function* logoutSaga() {
   try {
     yield removeToken();
-  } catch (e) {
-    yield put(authFailed(e.message));
+  } catch (error) {
+    yield put(authFailed(error));
   }
 }
 
 export default function* watcherSaga() {
-  yield takeEvery(actionTypes.AUTH_LOGOUT, logoutSaga);
+  yield takeLatest(actionTypes.AUTH_LOGOUT, logoutSaga);
 }

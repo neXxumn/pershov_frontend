@@ -8,8 +8,8 @@ function* getPostSaga() {
   try {
     const { data } = yield call(api.get, '/news');
     yield put(getPostsReceived(data));
-  } catch ({ message }) {
-    yield put(getPostsFailed(message));
+  } catch (error) {
+    yield put(getPostsFailed(error));
   }
 }
 

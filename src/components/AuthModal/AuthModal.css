@@ -37,6 +37,7 @@
   color: white;
   border: 1px solid white;
   background: dodgerblue;
+  cursor: pointer;
   transition: .2s;
 }
 
