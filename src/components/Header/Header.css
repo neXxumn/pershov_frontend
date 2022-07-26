@@ -1,8 +1,7 @@
 .css-hyum1k-MuiToolbar-root {
   color: black;
-  /* background: rgb(249,248,250); */
   background: rgb(201,230,251);
-  background: linear-gradient(90deg, rgba(201,230,251,1) 0%, rgba(139,177,255,1) 22%, rgba(90,139,240,1) 39%, rgba(5,72,205,1) 68%, rgba(4,58,196,1) 100%);
+  background: linear-gradient(90deg, rgba(201,230,251,1), rgba(139,177,255,1) 22%, rgba(90,139,240,1) 39%, rgba(5,72,205,1) 68%, rgba(4,58,196,1) 100%);
   border-bottom: 1px solid #0042c4;
 }
 

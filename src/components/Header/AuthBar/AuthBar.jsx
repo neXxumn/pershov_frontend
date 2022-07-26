@@ -1,16 +1,14 @@
 import React, { memo, useState } from 'react';
-
 import { useDispatch, useSelector } from 'react-redux';
 
 import Button from '@mui/material/Button';
 
-import { REGISTRATION, AUTHORIZATION } from '../../../redux/constants';
-
 import AuthModal from '../../AuthModal/AuthModal';
+import defaultUserAvatar from '../../../assets/images/default-user-avatar.svg';
 
+import { REGISTRATION, AUTHORIZATION } from '../../../redux/constants';
 import { authLogout } from '../../../redux/actions';
 
-import defaultUserAvatar from '../../../assets/images/default-user-avatar.svg';
 import './AuthBar.css';
 
 function AuthBar() {
