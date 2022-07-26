@@ -1,5 +1,11 @@
 export const POSTS_REQUESTED = 'POSTS_REQUESTED';
-
 export const POSTS_RECEIVED = 'POSTS_RECEIVED';
-
 export const POSTS_FAILED = 'POSTS_FAILED';
+
+export const AUTH_REQUESTED = 'AUTH_REQUESTED';
+export const AUTH_RECEIVED = 'AUTH_RECEIVED';
+export const AUTH_FAILED = 'AUTH_FAILED';
+export const AUTH_LOGOUT = 'AUTH_LOGOUT';
+
+export const REGISTRATION = 'REGISTRATION';
+export const AUTHORIZATION = 'AUTHORIZATION';

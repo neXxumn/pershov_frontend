@@ -1,7 +1,15 @@
 .css-hyum1k-MuiToolbar-root {
   color: black;
-  background: orangered;
+  background: rgb(201,230,251);
+  background: linear-gradient(90deg, rgba(201,230,251,1), rgba(139,177,255,1) 22%, rgba(90,139,240,1) 39%, rgba(5,72,205,1) 68%, rgba(4,58,196,1) 100%);
+  border-bottom: 1px solid #0042c4;
 }
+
+.css-1juivf6-MuiTypography-root {
+  color: #0042c4;
+  text-shadow: 2px 2px 5px #3569d1;
+}
+
 .mui-fixed{
   position: relative;
 }
